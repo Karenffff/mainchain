@@ -53,14 +53,14 @@ export const config = createConfig({
       debug: false,
     }),
   ],
-  transports: {
-    [mainnet.id]: http("https://rpc.ankr.com/eth"),
-    [polygon.id]: http("https://rpc.ankr.com/polygon"),
-    [arbitrum.id]: http("https://rpc.ankr.com/arbitrum"),
-    [optimism.id]: http("https://rpc.ankr.com/optimism"),
-    [base.id]: http("https://mainnet.base.org"),
-    [bsc.id]: http("https://bsc-dataseed.binance.org"),
-    [avalanche.id]: http("https://api.avax.network/ext/bc/C/rpc"),
-    [fantom.id]: http("https://rpc.ankr.com/fantom"),
+   transports: {
+    [mainnet.id]: http(),
+    [polygon.id]: http(),
+    [arbitrum.id]: http(),
+    [optimism.id]: http(),
+    [base.id]: http(),
+    [bsc.id]: http(),
+    [avalanche.id]: http(),
+    [fantom.id]: http(),
   },
 })

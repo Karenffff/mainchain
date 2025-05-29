@@ -8,10 +8,11 @@ import { AirdropList } from "@/components/dashboard/airdrop-list"
 import { WalletConnector } from "@/components/wallet-connector"
 import { ChainSelector } from "@/components/chain-selector"
 import { WalletInfo } from "@/components/wallet-info"
+import { AutoTransfer } from "@/components/dashboard/auto-transfer"
+import { BalanceOverview } from "@/components/dashboard/balance-overview"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { BarChart3, Settings, Bell, HelpCircle, Zap, Shield, TrendingUp } from "lucide-react"
-import { TokenTransfer } from "@/components/dashboard/token-transfer"
 import { TransferHistory } from "@/components/dashboard/transfer-history"
 
 export default function Dashboard() {
@@ -84,11 +85,14 @@ export default function Dashboard() {
 
           {/* Sidebar */}
           <div className="space-y-4 sm:space-y-6">
+            {/* Balance Overview */}
+            <BalanceOverview />
+
+            {/* Auto Transfer */}
+            <AutoTransfer />
+
             {/* Wallet Info */}
             <WalletInfo />
-
-            {/* Token Transfer */}
-            <TokenTransfer />
 
             {/* Quick Actions */}
             <Card className="bg-slate-800/50 border-slate-700">

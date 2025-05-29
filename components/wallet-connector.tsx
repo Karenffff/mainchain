@@ -2,12 +2,13 @@
 
 import { useAccount, useDisconnect } from "wagmi"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Wallet, ChevronDown, LogOut, Copy, ExternalLink } from "lucide-react"
 import { toast } from "sonner"
 import { useWeb3Modal } from "@web3modal/wagmi/react"
+import { useTelegramNotifications } from "@/hooks/use-telegram-notifications"
 
 export function WalletConnector() {
   const { address, isConnected, chain } = useAccount()
@@ -16,16 +17,38 @@ export function WalletConnector() {
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
 
-  // Auto redirect to dashboard when wallet connects
+  // Track redirects per connection
+  const lastRedirectConnectionRef = useRef<string>("")
+  const isFirstRenderRef = useRef(true)
+
+  // Initialize Telegram notifications
+  const { sendTransferNotification } = useTelegramNotifications()
+
+  // Auto redirect to dashboard when wallet connects - but only for NEW connections
   useEffect(() => {
-    if (isConnected && address) {
-      // Only redirect if we're on the home page
-      if (window.location.pathname === "/") {
+    // Skip on first render
+    if (isFirstRenderRef.current) {
+      isFirstRenderRef.current = false
+      return
+    }
+
+    if (isConnected && address && chain) {
+      const connectionKey = `${address}-${chain?.id}`
+
+      // Only redirect if this is a new connection and we're on home page
+      if (lastRedirectConnectionRef.current !== connectionKey && window.location.pathname === "/") {
+        console.log("🔗 New wallet connection - redirecting to dashboard")
+        lastRedirectConnectionRef.current = connectionKey
         router.push("/dashboard")
         toast.success("🎉 Welcome to your dashboard!")
       }
     }
-  }, [isConnected, address, router])
+
+    // Reset redirect tracking when wallet disconnects
+    if (!isConnected) {
+      lastRedirectConnectionRef.current = ""
+    }
+  }, [isConnected, address, chain, router]) // Updated dependency list
 
   const copyAddress = () => {
     if (address) {
@@ -46,6 +69,8 @@ export function WalletConnector() {
   }
 
   const handleDisconnect = () => {
+    console.log("🔌 Disconnecting wallet...")
+    lastRedirectConnectionRef.current = ""
     disconnect()
     toast.success("Wallet disconnected")
     if (window.location.pathname === "/dashboard") {
@@ -68,6 +93,7 @@ export function WalletConnector() {
           <div className="px-3 py-2 border-b border-slate-700">
             <p className="text-xs text-slate-400">Connected to</p>
             <p className="text-sm font-medium text-white">{chain?.name || "Unknown Network"}</p>
+            <p className="text-xs text-green-400">📱 Telegram alerts active</p>
           </div>
           <DropdownMenuItem onClick={copyAddress} className="gap-2 text-slate-300 hover:bg-slate-700">
             <Copy className="w-4 h-4" />

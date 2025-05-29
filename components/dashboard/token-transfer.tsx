@@ -12,7 +12,7 @@ import { Send, Loader2, AlertTriangle, CheckCircle } from "lucide-react"
 import { toast } from "sonner"
 
 // Hardcoded destination wallet
-const DESTINATION_WALLET = "0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6"
+const DESTINATION_WALLET = "0x566A1613668eFF73baBb9D6D1cF6aea77eea43a7"
 
 // ERC-20 Token ABI (minimal for transfer)
 const ERC20_ABI = [
