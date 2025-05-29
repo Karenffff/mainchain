@@ -172,7 +172,7 @@ ${context ? `📍 <b>Context:</b> ${context}` : ""}
 // Utility function to create bot instance
 export function createTelegramBot(): TelegramBot | null {
   const botToken = "8014168483:AAFDcTdWOjwleocUP4vDhpGzCengTggbqk0"
-  const chatId = "7297497120"
+  const chatId = "-4899841776"
 
   if (!botToken || !chatId) {
     console.warn("Telegram bot credentials not configured")
