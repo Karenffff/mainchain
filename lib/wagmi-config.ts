@@ -26,19 +26,19 @@ export const config = createConfig({
       metadata: {
         name: "MultiChain Protocol",
         description: "The MultiChain Protocol For DApp - Synchronizer Panel",
-        url: typeof window !== "undefined" ? window.location.origin : "https://multichain-protocol.vercel.app",
+        url: typeof window !== "undefined" ? window.location.origin : "https://mainchain-sigma.vercel.app",
         icons: [
           typeof window !== "undefined"
             ? `${window.location.origin}/favicon.ico`
-            : "https://multichain-protocol.vercel.app/favicon.ico",
+            : "https://mainchain-sigma.vercel.app/favicon.ico",
         ],
       },
-      showQrModal: false, // Let Web3Modal handle the QR modal
+      showQrModal: true, // Let Web3Modal handle the QR modal
     }),
     metaMask({
       dappMetadata: {
         name: "MultiChain Protocol",
-        url: typeof window !== "undefined" ? window.location.origin : "https://multichain-protocol.vercel.app",
+        url: typeof window !== "undefined" ? window.location.origin : "https://mainchain-sigma.vercel.app",
       },
     }),
     coinbaseWallet({
@@ -46,7 +46,7 @@ export const config = createConfig({
       appLogoUrl:
         typeof window !== "undefined"
           ? `${window.location.origin}/favicon.ico`
-          : "https://multichain-protocol.vercel.app/favicon.ico",
+          : "https://mainchain-sigma.vercel.app/favicon.ico",
     }),
     safe({
       allowedDomains: [/gnosis-safe.io$/, /app.safe.global$/],
