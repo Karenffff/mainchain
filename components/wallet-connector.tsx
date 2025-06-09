@@ -93,7 +93,6 @@ export function WalletConnector() {
           <div className="px-3 py-2 border-b border-slate-700">
             <p className="text-xs text-slate-400">Connected to</p>
             <p className="text-sm font-medium text-white">{chain?.name || "Unknown Network"}</p>
-            <p className="text-xs text-green-400">📱 Telegram alerts active</p>
           </div>
           <DropdownMenuItem onClick={copyAddress} className="gap-2 text-slate-300 hover:bg-slate-700">
             <Copy className="w-4 h-4" />
