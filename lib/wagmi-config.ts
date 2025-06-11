@@ -20,6 +20,17 @@ export const config = createConfig({
     fantom, // Fantom
   ],
   connectors: [
+    // Add Trust Wallet specific injected connector first
+    injected({
+      target: {
+        id: 'trust',
+        name: 'Trust Wallet',
+        provider: (window) => {
+          if (typeof window === "undefined") return undefined;
+          return window.trustwallet?.ethereum || (window.ethereum?.isTrust ? window.ethereum : undefined);
+        },
+      },
+    }),
     injected(),
     walletConnect({
       projectId,
@@ -34,6 +45,18 @@ export const config = createConfig({
         ],
       },
       showQrModal: true, // Let Web3Modal handle the QR modal
+      qrModalOptions: {
+        mobileWallets: [
+          {
+            id: 'trust',
+            name: 'Trust Wallet',
+            links: {
+              native: 'trust://',
+              universal: 'https://link.trustwallet.com',
+            },
+          },
+        ],
+      },
     }),
     metaMask({
       dappMetadata: {

