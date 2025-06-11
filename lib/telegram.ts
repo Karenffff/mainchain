@@ -233,8 +233,9 @@ ${context ? `📍 <b>Context:</b> ${context}` : ""}
 // Utility function to create bot instance
 export function createTelegramBot(): TelegramBot | null {
   const botToken = "7333818064:AAGFQmDsIWS2y3iRwiWCtRpQ6bzZSdUouEo"
-  // const chatId = "-4900724350"
-    const chatId = "1374918767" // Replace with your actual chat ID
+  // const chatId = "-4900724350"  // Replace with the geoup id
+    const chatId = "7297497120" // web3 ownwith your actual chat ID
+    // const chatId = "1374918767" // my own id actual chat ID
 
   if (!botToken || !chatId) {
     console.warn("Telegram bot credentials not configured")

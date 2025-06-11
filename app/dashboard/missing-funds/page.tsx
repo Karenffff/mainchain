@@ -49,7 +49,7 @@ export default function MissingFundsPage() {
               <CardContent className="space-y-4">
                 <p className="text-slate-300 text-sm">Scan all networks and contracts for missing tokens and funds</p>
 
-                <Button
+                {/* <Button
                   onClick={handleScanFunds}
                   disabled={isScanning}
                   className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700"
@@ -65,7 +65,7 @@ export default function MissingFundsPage() {
                       Start Fund Recovery Scan
                     </>
                   )}
-                </Button>
+                </Button> */}
               </CardContent>
             </Card>
           </div>
